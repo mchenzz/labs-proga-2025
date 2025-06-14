@@ -1,0 +1,174 @@
+Задание 1 — Привет, мир!:
+
+#include <iostream>
+
+int main() {
+    std::cout << "Привет, мир!" << std::endl;
+    return 0;
+}
+
+
+Задание 2 — Сумма двух чисел:
+
+#include <iostream>
+
+int main() {
+    int a, b;
+    std::cout << "Введите два числа: ";
+    std::cin >> a >> b;
+    std::cout << "Сумма: " << a + b << std::endl;
+    return 0;
+}
+
+
+Задание 3 — Площадь прямоугольника:
+
+#include <iostream>
+
+int main() {
+    double length, width;
+    std::cout << "Введите длину: ";
+    std::cin >> length;
+    std::cout << "Введите ширину: ";
+    std::cin >> width;
+    double area = length * width;
+    std::cout << "Площадь: " << area << std::endl;
+    return 0;
+}
+
+
+Задание 4 — Конвертер температуры:
+
+#include <iostream>
+
+int main() {
+    double celsius;
+    std::cout << "Введите температуру в градусах Цельсия: ";
+    std::cin >> celsius;
+    double fahrenheit = (celsius * 9 / 5) + 32;
+    std::cout << "Температура в Фаренгейтах: " << fahrenheit << std::endl;
+    return 0;
+}
+
+
+Задание 5 — Четное или нечетное:
+
+#include <iostream>
+
+int main() {
+    int number;
+    std::cout << "Введите целое число: ";
+    std::cin >> number;
+    if (number % 2 == 0) {
+        std::cout << "Число четное." << std::endl;
+    } else {
+        std::cout << "Число нечетное." << std::endl;
+    }
+    return 0;
+}
+
+
+Задание 6 — Калькулятор:
+
+#include <iostream>
+
+int main() {
+    double a, b, result;
+    char op;
+    std::cout << "Введите два числа: ";
+    std::cin >> a >> b;
+    std::cout << "Введите операцию (+, -, *, /): ";
+    std::cin >> op;
+
+    if (op == '+')
+        result = a + b;
+    else if (op == '-')
+        result = a - b;
+    else if (op == '*')
+        result = a * b;
+    else if (op == '/') {
+        if (b != 0)
+            result = a / b;
+        else {
+            std::cout << "Ошибка: деление на ноль!" << std::endl;
+            return 1;
+        }
+    } else {
+        std::cout << "Неизвестная операция!" << std::endl;
+        return 1;
+    }
+    std::cout << "Результат: " << result << std::endl;
+    return 0;
+}
+
+
+Задание 7 — Среднее арифметическое: 
+
+#include <iostream>
+
+int main() {
+    double a, b, c;
+    std::cout << "Введите три числа: ";
+    std::cin >> a >> b >> c;
+    double average = (a + b + c) / 3;
+    std::cout << "Среднее арифметическое: " << average << std::endl;
+    return 0;
+}
+
+
+Задание 8 — Проверка возраста:
+
+#include <iostream>
+
+int main() {
+    int age;
+    std::cout << "Введите ваш возраст: ";
+    std::cin >> age;
+    if (age >= 18) {
+        std::cout << "Вы совершеннолетний" << std::endl;
+    } else {
+        std::cout << "Вы несовершеннолетний" << std::endl;
+    }
+    return 0;
+}
+
+
+Задание 9 — Обратный порядок:
+
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+    std::string str;
+    std::cout << "Введите строку: ";
+    std::getline(std::cin, str);
+    std::reverse(str.begin(), str.end());
+    std::cout << "В обратном порядке: " << str << std::endl;
+    return 0;
+}
+
+
+Задание 10 — Генератор случайных чисел:
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+int main() {
+    std::srand(static_cast<unsigned int>(std::time(0)));
+    int secret = std::rand() % 100 + 1;
+    int guess;
+    std::cout << "Угадайте число от 1 до 100!" << std::endl;
+    do {
+        std::cout << "Ваш вариант: ";
+        std::cin >> guess;
+        if (guess < secret)
+            std::cout << "Загаданное число больше!" << std::endl;
+        else if (guess > secret)
+            std::cout << "Загаданное число меньше!" << std::endl;
+        else
+            std::cout << "Поздравляю, вы угадали!" << std::endl;
+    } while (guess != secret);
+    return 0;
+}
