@@ -1,0 +1,253 @@
+Задание 1 — Перегрузка арифметических операторов:
+
+#include <iostream>
+int gcd(int a, int b) { while(b) { int t = b; b = a % b; a = t; } return a; }
+
+class Fraction {
+    int numerator, denominator;
+    void reduce() {
+        int g = gcd(abs(numerator), abs(denominator));
+        if (g) { numerator /= g; denominator /= g; }
+        // знак только у числителя
+        if(denominator < 0) { numerator = -numerator; denominator = -denominator; }
+    }
+public:
+    Fraction(int n=0, int d=1) : numerator(n), denominator(d) { reduce(); }
+    Fraction operator+(const Fraction& other) const {
+        int num = numerator * other.denominator + other.numerator * denominator;
+        int denom = denominator * other.denominator;
+        return Fraction(num, denom);
+    }
+    Fraction operator-(const Fraction& other) const {
+        int num = numerator * other.denominator - other.numerator * denominator;
+        int denom = denominator * other.denominator;
+        return Fraction(num, denom);
+    }
+    Fraction operator*(const Fraction& other) const {
+        return Fraction(numerator * other.numerator, denominator * other.denominator);
+    }
+    Fraction operator/(const Fraction& other) const {
+        return Fraction(numerator * other.denominator, denominator * other.numerator);
+    }
+    friend std::ostream& operator<<(std::ostream& out, const Fraction& f) {
+        return out << f.numerator << "/" << f.denominator;
+    }
+};
+
+int main() {
+    Fraction f1(2,3), f2(1,6);
+    std::cout << f1 << " + " << f2 << " = " << f1 + f2 << std::endl;
+    std::cout << f1 << " - " << f2 << " = " << f1 - f2 << std::endl;
+    std::cout << f1 << " * " << f2 << " = " << f1 * f2 << std::endl;
+    std::cout << f1 << " / " << f2 << " = " << f1 / f2 << std::endl;
+}
+
+
+Задание 2 — Перегрузка оператора сравнения:
+
+#include <iostream>
+#include <string>
+class Student {
+public:
+    std::string name;
+    int grade;
+    Student(const std::string& n, int g): name(n), grade(g) {}
+    bool operator==(const Student& s) const { return grade == s.grade; }
+    bool operator<(const Student& s) const { return name < s.name; }
+};
+
+int main() {
+    Student a("Ваня", 5), b("Петя", 5), c("Аня", 4);
+    std::cout << (a == b) << " " << (a == c) << std::endl; // 1 0
+    std::cout << (c < a) << std::endl; // 1 (Аня < Ваня)
+}
+
+
+Задание 3 — Перегрузка оператора ввода/вывода:
+
+#include <iostream>
+#include <string>
+class Book {
+public:
+    std::string title;
+    int year;
+    friend std::ostream& operator<<(std::ostream& out, const Book& b) {
+        return out << b.title << " (" << b.year << ")";
+    }
+    friend std::istream& operator>>(std::istream& in, Book& b) {
+        std::getline(in, b.title);
+        in >> b.year;
+        in.ignore(); // убрать перевод строки после числа
+        return in;
+    }
+};
+
+int main() {
+    Book b;
+    std::cout << "Введите название и год:" << std::endl;
+    std::cin >> b;
+    std::cout << "Книга: " << b << std::endl;
+}
+
+
+Задание 4 — Перегрузка оператора инкремента:
+
+#include <iostream>
+class Counter {
+    int value;
+public:
+    Counter(int v=0): value(v) {}
+    // Префикс
+    Counter& operator++() { value++; return *this; }
+    // Постфикс
+    Counter operator++(int) { Counter temp = *this; value++; return temp; }
+    int get() const { return value; }
+};
+
+int main() {
+    Counter c(5);
+    ++c;
+    std::cout << c.get() << std::endl; // 6
+    c++;
+    std::cout << c.get() << std::endl; // 7
+}
+
+
+Задание 5 — Перегрузка оператора приведения типа:
+
+#include <iostream>
+class Distance {
+    double meters;
+public:
+    Distance(double m): meters(m) {}
+    operator double() const { return meters / 1000.0; } // в километрах
+};
+
+int main() {
+    Distance d(1500);
+    double km = d;
+    std::cout << "В километрах: " << km << std::endl;
+}
+
+
+Задание 6 — Дружественная функция
+
+#include <iostream>
+class Rectangle {
+    double width, height;
+public:
+    Rectangle(double w, double h): width(w), height(h) {}
+    friend double calculateArea(const Rectangle&);
+};
+
+double calculateArea(const Rectangle& r) {
+
+    return r.width * r.height;
+}
+
+int main() {
+    Rectangle r(3, 4.5);
+    std::cout << calculateArea(r) << std::endl;
+}
+
+
+Задание 7 — Дружественный класс:
+
+#include <iostream>
+#include <string>
+class SecretAccess; // заранее объявляем
+
+class Secret {
+    std::string data;
+public:
+    Secret(const std::string& d): data(d) {}
+    friend class SecretAccess;
+};
+
+class SecretAccess {
+public:
+    void printSecret(const Secret& s) {
+        std::cout << "Секрет: " << s.data << std::endl;
+    }
+};
+
+int main() {
+    Secret s("Пароль123!");
+    SecretAccess sa;
+    sa.printSecret(s);
+}
+
+
+Задание 8 — Перегрузка оператора присваивания:
+
+#include <iostream>
+class DynamicArray {
+    int* arr;
+    int size;
+public:
+    DynamicArray(int s): size(s), arr(new int[s]) {}
+    ~DynamicArray() { delete[] arr; }
+    DynamicArray(const DynamicArray& d): size(d.size), arr(new int[d.size]) {
+        for(int i=0;i<size;i++) arr[i]=d.arr[i];
+    }
+    DynamicArray& operator=(const DynamicArray& d) {
+        if(this == &d) return *this;
+        delete[] arr;
+        size = d.size;
+        arr = new int[size];
+        for(int i=0;i<size;i++) arr[i]=d.arr[i];
+        return *this;
+    }
+    int& operator[](int i) { return arr[i]; }
+};
+
+int main() {
+    DynamicArray a(3);
+    a[0]=1; a[1]=2; a[2]=3;
+    DynamicArray b(1);
+    b = a;
+    std::cout << b[2] << std::endl;
+}
+
+
+Задание 9 — Перегрузка оператора индексации:
+
+#include <iostream>
+#include <string>
+class String {
+    std::string data;
+public:
+    String(const std::string& s): data(s) {}
+    char& operator[](int i) { return data[i]; }
+    const char& operator[](int i) const { return data[i]; }
+    void print() const { std::cout << data << std::endl; }
+};
+
+int main() {
+    String s("hello");
+    s[0] = 'H'; // запись
+    std::cout << s[1] << std::endl; // чтение
+    s.print();
+}
+
+
+Задание 10 — Комбинированная задача
+
+#include <iostream>
+class Matrix {
+    double m[2][2];
+public:
+    Matrix(double a=0,double b=0,double c=0,double d=0) {
+        m[0][0]=a; m[0][1]=b; m[1][0]=c; m[1][1]=d;
+    }
+    Matrix operator+(const Matrix& other) const {
+        return Matrix(m[0][0]+other.m[0][0], m[0][1]+other.m[0][1],
+                      m[1][0]+other.m[1][0], m[1][1]+other.m[1][1]);
+    }
+    Matrix operator*(const Matrix& other) const {
+        return Matrix(
+            m[0][0]*other.m[0][0]+m[0][1]*other.m[1][0], m[0][0]*other.m[0][1]+m[0][1]*other.m[1][1],
+            m[1][0]*other.m[0][0]+m[1][1]*other.m[1][0], m[1][0]*other.m[0][1]+m[1][1]*other.m[1][1]
+        );
+    }
+    friend std::ostream& operator<<(std::ostream& out, const Matrix& mat) {
