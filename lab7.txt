@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+#include <type_traits>
+#include <typeinfo>
+
+// 1. Шаблон функции для нахождения максимума
+template <typename T>
+T maxValue(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+// 2. Проверка типов в шаблоне
+template <typename T, typename U>
+bool isEqual(T a, U b) {
+    static_assert(std::is_same<T, U>::value, "Error: Types must be the same!");
+    return a == b;
+}
+
+// 3. Специализация шаблона для строк
+template <typename T>
+void printType(T value) {
+    std::cout << "Type: " << typeid(T).name() << std::endl;
+}
+
+template <>
+void printType<const char*>(const char* value) {
+    std::cout << "Type: C-style string" << std::endl;
+}
+
+// 4. Шаблон функции с разными типами
+template <typename T, typename U>
+auto multiply(T a, U b) -> decltype(a * b) {
+    return a * b;
+}
+
+// 5. Явная конкретизация шаблона
+template <typename T>
+T square(T value) {
+    return value * value;
+}
+
+template <>
+int square<int>(int value) {
+    std::cout << "Calculating square of an integer." << std::endl;
+    return value * value;
+}
+
+int main() {
+    // Тест для maxValue
+    std::cout << maxValue(5, 10) << std::endl; // 10
+    std::cout << maxValue(3.14, 2.71) << std::endl; // 3.14
+    std::cout << maxValue(std::string("apple"), std::string("orange")) << std::endl; // "orange"
+
+    // Тест для isEqual
+    std::cout << isEqual(5, 5) << std::endl; // OK
+    // std::cout << isEqual(5, 5.0) << std::endl; // Ошибка компиляции
+
+    // Тест для printType
+    printType(42); // Тип: int
+    printType(3.14); // Тип: double
+    printType("Hello, world!"); // Тип: C-style string
+
+    // Тест для multiply
+    std::cout << multiply(3, 4.5) << std::endl; // 13.5
+    std::cout << multiply(2.5, 4) << std::endl; // 10.0
+
+    // Тест для square
+    std::cout << square(5) << std::endl; // Выводит сообщение и результат 25
+    std::cout << square(3.14) << std::endl; // Выводит только результат 9.8596
+
+    return 0;
+}
