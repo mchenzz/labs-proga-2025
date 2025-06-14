@@ -1,0 +1,1459 @@
+
+ЛАБА 1
+
+Задание 1 — Привет, мир!
+#include <iostream>
+
+int main() {
+    std::cout << "Привет, мир!" << std::endl;
+    return 0;
+}
+
+
+Задание 2 — Сумма двух чисел
+#include <iostream>
+
+int main() {
+    int a, b;
+    std::cout << "Введите два числа: ";
+    std::cin >> a >> b;
+    std::cout << "Сумма: " << a + b << std::endl;
+    return 0;
+}
+
+
+Задание 3 — Площадь прямоугольника
+#include <iostream>
+
+int main() {
+    double length, width;
+    std::cout << "Введите длину: ";
+    std::cin >> length;
+    std::cout << "Введите ширину: ";
+    std::cin >> width;
+    double area = length * width;
+    std::cout << "Площадь: " << area << std::endl;
+    return 0;
+}
+
+
+Задание 4 — Конвертер температуры
+#include <iostream>
+
+int main() {
+    double celsius;
+    std::cout << "Введите температуру в градусах Цельсия: ";
+    std::cin >> celsius;
+    double fahrenheit = (celsius * 9 / 5) + 32;
+    std::cout << "Температура в Фаренгейтах: " << fahrenheit << std::endl;
+    return 0;
+}
+
+
+Задание 5 — Четное или нечетное
+#include <iostream>
+
+int main() {
+    int number;
+    std::cout << "Введите целое число: ";
+    std::cin >> number;
+    if (number % 2 == 0) {
+        std::cout << "Число четное." << std::endl;
+    } else {
+        std::cout << "Число нечетное." << std::endl;
+    }
+    return 0;
+}
+
+
+Задание 6 — Калькулятор
+#include <iostream>
+
+int main() {
+    double a, b, result;
+    char op;
+    std::cout << "Введите два числа: ";
+    std::cin >> a >> b;
+    std::cout << "Введите операцию (+, -, *, /): ";
+    std::cin >> op;
+
+    if (op == '+')
+        result = a + b;
+    else if (op == '-')
+        result = a - b;
+    else if (op == '*')
+        result = a * b;
+    else if (op == '/') {
+        if (b != 0)
+            result = a / b;
+        else {
+            std::cout << "Ошибка: деление на ноль!" << std::endl;
+            return 1;
+        }
+    } else {
+        std::cout << "Неизвестная операция!" << std::endl;
+        return 1;
+    }
+    std::cout << "Результат: " << result << std::endl;
+    return 0;
+}
+
+
+Задание 7 — Среднее арифметическое
+#include <iostream>
+
+int main() {
+    double a, b, c;
+    std::cout << "Введите три числа: ";
+    std::cin >> a >> b >> c;
+    double average = (a + b + c) / 3;
+    std::cout << "Среднее арифметическое: " << average << std::endl;
+    return 0;
+}
+
+
+Задание 8 — Проверка возраста
+#include <iostream>
+
+int main() {
+    int age;
+    std::cout << "Введите ваш возраст: ";
+    std::cin >> age;
+    if (age >= 18) {
+        std::cout << "Вы совершеннолетний" << std::endl;
+    } else {
+        std::cout << "Вы несовершеннолетний" << std::endl;
+    }
+    return 0;
+}
+
+
+Задание 9 — Обратный порядок
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+int main() {
+    std::string str;
+    std::cout << "Введите строку: ";
+    std::getline(std::cin, str);
+    std::reverse(str.begin(), str.end());
+    std::cout << "В обратном порядке: " << str << std::endl;
+    return 0;
+}
+
+
+Задание 10 — Генератор случайных чисел
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+int main() {
+    std::srand(static_cast<unsigned int>(std::time(0)));
+    int secret = std::rand() % 100 + 1;
+    int guess;
+    std::cout << "Угадайте число от 1 до 100!" << std::endl;
+    do {
+        std::cout << "Ваш вариант: ";
+        std::cin >> guess;
+        if (guess < secret)
+            std::cout << "Загаданное число больше!" << std::endl;
+        else if (guess > secret)
+            std::cout << "Загаданное число меньше!" << std::endl;
+        else
+            std::cout << "Поздравляю, вы угадали!" << std::endl;
+    } while (guess != secret);
+    return 0;
+}
+
+Если нужна помощь с объяснением или разбором какой-то задачи — пиши!
+
+ЛАБА 2
+
+ChatGPT + Midjourney, [30.05.2025 18:51]
+Задание 1 — Факториал числа:
+
+#include <iostream>
+
+int main() {
+    int n;
+    unsigned long long fact = 1;
+    std::cout << "Введите число: ";
+    std::cin >> n;
+    for (int i = 1; i <= n; ++i) {
+        fact *= i;
+    }
+    std::cout << "Факториал: " << fact << std::endl;
+    return 0;
+}
+
+
+Задание 2 — Таблица умножения:
+
+#include <iostream>
+
+int main() {
+    int n;
+    std::cout << "Введите число: ";
+    std::cin >> n;
+    for (int i = 1; i <= 10; ++i) {
+        std::cout << n << " * " << i << " = " << n * i << std::endl;
+    }
+    return 0;
+}
+
+
+Задание 3 — Проверка на простое число:
+
+#include <iostream>
+
+int main() {
+    int n, i;
+    bool isPrime = true;
+    std::cout << "Введите число: ";
+    std::cin >> n;
+    if (n <= 1) isPrime = false;
+    for (i = 2; i * i <= n; ++i) {
+        if (n % i == 0) {
+            isPrime = false;
+            break;
+        }
+    }
+    if (isPrime)
+        std::cout << "Число простое" << std::endl;
+    else
+        std::cout << "Число не является простым" << std::endl;
+    return 0;
+}
+
+
+Задание 4 — Сумма цифр числа:
+
+#include <iostream>
+#include <cstdlib>
+
+int main() {
+    int n, sum = 0;
+    std::cout << "Введите число: ";
+    std::cin >> n;
+    n = abs(n);
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    std::cout << "Сумма цифр: " << sum << std::endl;
+    return 0;
+}
+
+
+Задание 5 — Перевод в двоичную систему:
+
+#include <iostream>
+#include <vector>
+
+int main() {
+    int n;
+    std::cout << "Введите число: ";
+    std::cin >> n;
+    if (n == 0) {
+        std::cout << "0" << std::endl;
+        return 0;
+    }
+    std::vector<int> bin;
+    unsigned int x = n;
+    while (x > 0) {
+        bin.push_back(x % 2);
+        x /= 2;
+    }
+    std::cout << "В двоичной системе: ";
+    for (int i = bin.size() - 1; i >= 0; --i) {
+        std::cout << bin[i];
+    }
+    std::cout << std::endl;
+    return 0;
+}
+
+
+Задание 6 — Поиск минимального и максимального числа:
+
+#include <iostream>
+#include <algorithm>
+
+int main() {
+    int a, b, c;
+    std::cout << "Введите три числа: ";
+    std::cin >> a >> b >> c;
+    int min_val = std::min({a, b, c});
+    int max_val = std::max({a, b, c});
+    std::cout << "Минимальное: " << min_val << std::endl;
+    std::cout << "Максимальное: " << max_val << std::endl;
+    return 0;
+}
+
+
+Задание 7 — Ряд Фибоначчи:
+
+#include <iostream>
+
+int main() {
+    int n;
+    std::cout << "Введите N: ";
+    std::cin >> n;
+    unsigned long long a = 0, b = 1;
+    std::cout << "Ряд Фибоначчи: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << a << " ";
+        unsigned long long next = a + b;
+        a = b;
+        b = next;
+    }
+    std::cout << std::endl;
+    return 0;
+}
+
+
+Задание 8 — Подсчет гласных в строке:
+
+#include <iostream>
+#include <string>
+#include <cctype>
+
+int main() {
+    std::string str;
+    std::cout << "Введите строку: ";
+    std::getline(std::cin, str);
+    int count = 0;
+    for (char c : str) {
+        c = std::tolower(c);
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') count++;
+    }
+    std::cout << "Количество гласных: " << count << std::endl;
+    return 0;
+}
+
+
+Задание 9 — Реверс числа:
+
+#include <iostream>
+
+int main() {
+    int n, rev = 0;
+    std::cout << "Введите число: ";
+    std::cin >> n;
+    int orig = n;
+    n = abs(n);
+    while (n > 0) {
+        rev = rev * 10 + n % 10;
+        n /= 10;
+    }
+    if (orig < 0) rev = -rev;
+    std::cout << "В обратном порядке: " << rev << std::endl;
+    return 0;
+}
+
+
+Задание 10 — Калькулятор с повторением:
+
+#include <iostream>
+#include <string>
+
+int main() {
+    while (true) {
+        std::string command;
+        double a, b, result;
+        char op;
+        std::cout << "Введите операцию в формате: число операция число (или напишите 'выход' для выхода): ";
+        std::cin >> command;
+        if (command == "выход") break;
+        try {
+            a = std::stod(command);
+        } catch (...) {
+            std::cout << "Ошибка ввода" << std::endl;
+            continue;
+        }
+        std::cin >> op >> b;
+
+        if (op == '+')
+            result = a + b;
+        else if (op == '-')
+            result = a - b;
+        else if (op == '*')
+            result = a * b;
+        else if (op == '/') {
+            if (b == 0) {
+                std::cout << "Деление на ноль!" << std::endl;
+                continue;
+            }
+            result = a / b;
+        } else {
+            std::cout << "Неизвестная операция!" << std::endl;
+            continue;
+        }
+
+        std::cout << "Результат: " << result << std::endl;
+    }
+    std::cout << "Калькулятор завершен." << std::endl;
+    return 0;
+}
+
+
+Если нужна помощь с пояснениями или примерами — пиши!
+
+
+ЛАБА 3
+
+Задача 1 — Пространство имен для математических операций:
+
+#include <iostream>
+namespace MathUtils {
+    const double PI = 3.1415;
+    int square(int x) { return x * x; }
+}
+
+int main() {
+    std::cout << "Square: " << MathUtils::square(5) << std::endl;
+    std::cout << "PI: " << MathUtils::PI << std::endl;
+    return 0;
+}
+```
+
+Задача 2 — Вложенные пространства имен:
+
+#include <iostream>
+namespace Game {
+    namespace Physics {
+        void applyGravity() {
+            std::cout << "Gravity applied!" << std::endl;
+        }
+    }
+}
+
+int main() {
+    Game::Physics::applyGravity();
+    return 0;
+}
+```
+
+Задача 3 — Псевдонимы для пространств:
+
+#include <iostream>
+namespace VeryLongNamespaceName {
+    void test() { std::cout << "Test called!" << std::endl; }
+}
+
+namespace Short = VeryLongNamespaceName;
+
+int main() {
+    Short::test();
+    return 0;
+}
+```
+
+Задача 4 — Исправьте ошибку (using namespace):
+
+#include <iostream>
+namespace A { int x = 10; }
+namespace B { int x = 20; }
+
+int main() {
+    std::cout << A::x << std::endl; // Явно указываем пространство имен
+    // Или: std::cout << B::x << std::endl;
+    return 0;
+}
+
+Задача 5 — Динамическое создание объекта:
+
+#include <iostream>
+#include <string>
+class Student {
+public:
+    std::string name;
+    Student(const std::string& n) : name(n) {}
+};
+
+int main() {
+    Student* st = new Student("Alice");
+    std::cout << st->name << std::endl;
+    delete st;
+    return 0;
+}
+
+Задача 6 — Массивы и new/delete:
+
+#include <iostream>
+int main() {
+    int* arr = new int[10];
+    for (int i = 0; i < 10; ++i) arr[i] = i + 1;
+    for (int i = 0; i < 10; ++i) std::cout << arr[i] << " ";
+    std::cout << std::endl;
+    delete[] arr;
+    return 0;
+}
+```
+
+Задача 7 — Обработка исключений:
+
+#include <iostream>
+#include <new>
+int main() {
+    try {
+        int* bigArr = new int[1000000000000];
+        delete[] bigArr;
+    } catch (std::bad_alloc&) {
+        std::cout << "Out of memory!" << std::endl;
+    }
+    return 0;
+}
+
+Задача 8 — Поиск утечек:
+
+int* a = new int(5);
+int* arr = new int[3]{1, 2, 3};
+delete a;
+delete[] arr; // Исправлено: был пропущен delete[]
+// Исправление 1: delete[] для массива
+// Ошибка 2: можно еще добавить nullptr после удаления, чтобы избежать висячих указателей:
+a = nullptr;
+arr = nullptr;
+// Ошибка 3: Нет использования результата вне main (можно добавить вывод, но для утечки это не критично)
+
+Задача 9 — Умные указатели:
+
+#include <iostream>
+#include <string>
+#include <memory>
+class Student {
+public:
+    std::string name;
+    Student(const std::string& n) : name(n) {}
+};
+
+int main() {
+    std::unique_ptr<Student> st(new Student("Alice"));
+    std::cout << st->name << std::endl;
+    // delete НЕ нужен! Память освободится автоматически.
+    return 0;
+}
+```
+*Пояснение*  
+std::unique_ptr автоматически освобождает память, предотвращая утечки и двойное освобождение. Вам не нужно вызывать delete вручную.
+
+Задача 10 — Комплексная задача
+
+#include <iostream>
+#include <string>
+#include <memory>
+namespace Library {
+    class Book {
+    public:
+        std::string title;
+        Book(const std::string& t) : title(t) {}
+    };
+}
+
+int main() {
+    std::shared_ptr<Library::Book> books[3] = {
+        std::make_shared<Library::Book>("C++ Primer"),
+        std::make_shared<Library::Book>("Effective C++"),
+        std::make_shared<Library::Book>("Clean Code")
+    };
+    for (int i = 0; i < 3; ++i)
+        std::cout << books[i]->title << std::endl;
+    // Память освободится автоматически при выходе из main
+    return 0;
+}
+
+ЛАБА 4
+
+ChatGPT + Midjourney, [30.05.2025 18:54]
+Задание 1 — Создание простого класса
+#include <iostream>
+#include <string>
+class Book {
+public:
+    std::string title;
+    std::string author;
+    int year;
+    void display() {
+        std::cout << "Название: " << title << ", Автор: " << author << ", Год: " << year << std::endl;
+    }
+};
+
+int main() {
+    Book book1;
+    book1.title = "1984";
+    book1.author = "George Orwell";
+    book1.year = 1949;
+    book1.display();
+    return 0;
+}
+
+
+Задание 2 — Конструкторы
+#include <iostream>
+#include <string>
+class Book {
+public:
+    std::string title;
+    std::string author;
+    int year;
+    Book() : title(""), author(""), year(0) {}
+    Book(const std::string& t, const std::string& a, int y) : title(t), author(a), year(y) {}
+    void display() {
+        std::cout << "Название: " << title << ", Автор: " << author << ", Год: " << year << std::endl;
+    }
+};
+
+int main() {
+    Book book1;
+    Book book2("Мастер и Маргарита", "Михаил Булгаков", 1967);
+    book1.display();
+    book2.display();
+    return 0;
+}
+
+
+Задание 3 — Деструктор
+#include <iostream>
+#include <string>
+class Book {
+public:
+    std::string title;
+    std::string author;
+    int year;
+    Book() : title(""), author(""), year(0) {}
+    Book(const std::string& t, const std::string& a, int y) : title(t), author(a), year(y) {}
+    ~Book() {
+        std::cout << "Книга '" << title << "' уничтожена." << std::endl;
+    }
+    void display() {
+        std::cout << "Название: " << title << ", Автор: " << author << ", Год: " << year << std::endl;
+    }
+};
+
+int main() {
+    Book b("Война и мир", "Лев Толстой", 1869);
+    b.display();
+    // При выходе из main будет вызван деструктор
+    return 0;
+}
+
+
+Задание 4 — Модификаторы доступа
+#include <iostream>
+#include <string>
+class BankAccount {
+private:
+    double balance;
+public:
+    std::string owner;
+    BankAccount(const std::string& o, double b) : owner(o), balance(b) {}
+    void deposit(double amount) {
+        if (amount > 0) balance += amount;
+    }
+    bool withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+    double getBalance() const {
+        return balance;
+    }
+};
+
+int main() {
+    BankAccount acc("Иван Иванов", 1000);
+    acc.deposit(500);
+    acc.withdraw(200);
+    std::cout << acc.owner << ", баланс: " << acc.getBalance() << std::endl;
+    return 0;
+}
+
+
+Задание 5 — Композиция классов
+#include <iostream>
+class Engine {
+public:
+    int power;
+    Engine(int p) : power(p) {}
+    void start() {
+        std::cout << "Двигатель запущен с мощностью " << power << " л.с." << std::endl;
+    }
+};
+
+class Car {
+private:
+    Engine engine;
+public:
+    Car(int power) : engine(power) {}
+    void startCar() {
+        engine.start();
+        std::cout << "Автомобиль заведен." << std::endl;
+    }
+};
+
+int main() {
+    Car car(150);
+    car.startCar();
+    return 0;
+}
+
+
+Задание 6 — Перегрузка методов
+#include <iostream>
+class Calculator {
+public:
+    int add(int a, int b) {
+        return a + b;
+    }
+    double add(double a, double b) {
+        return a + b;
+    }
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+};
+
+int main() {
+    Calculator calc;
+    std::cout << calc.add(1, 2) << std::endl;
+    std::cout << calc.add(2.5, 3.7) << std::endl;
+    std::cout << calc.add(1, 2, 3) << std::endl;
+    return 0;
+}
+
+
+Задание 7 — Статические члены класса
+#include <iostream>
+#include <string>
+class BankAccount {
+private:
+    double balance;
+    static int totalAccounts;
+public:
+    std::string owner;
+    BankAccount(const std::string& o, double b) : owner(o), balance(b) {
+        ++totalAccounts;
+    }
+    ~BankAccount() { --totalAccounts; }
+    void deposit(double amount) {
+        if (amount > 0) balance += amount;
+    }
+    bool withdraw(double amount) {
+        if (amount <= balance) { balance -= amount; return true; }
+        return false;
+    }
+    double getBalance() const { return balance; }
+
+ChatGPT + Midjourney, [30.05.2025 18:54]
+
+    static int getTotalAccounts() { return totalAccounts; }
+};
+int BankAccount::totalAccounts = 0;
+
+int main() {
+    BankAccount acc1("Иван", 1000);
+    BankAccount acc2("Петр", 500);
+    std::cout << "Всего счетов: " << BankAccount::getTotalAccounts() << std::endl;
+    {
+        BankAccount acc3("Сергей", 10);
+        std::cout << "Всего счетов: " << BankAccount::getTotalAccounts() << std::endl;
+    }
+    std::cout << "Всего счетов: " << BankAccount::getTotalAccounts() << std::endl;
+    return 0;
+}
+
+
+Задание 8 — Конструктор копирования
+#include <iostream>
+#include <string>
+class Student {
+public:
+    std::string name;
+    int age;
+    Student(const std::string& n, int a) : name(n), age(a) {}
+    Student(const Student& other) : name(other.name), age(other.age) {
+        std::cout << "Вызван конструктор копирования!" << std::endl;
+    }
+};
+
+int main() {
+    Student s1("Мария", 21);
+    Student s2 = s1;
+    std::cout << "s2: " << s2.name << ", " << s2.age << std::endl;
+    return 0;
+}
+
+
+Задание 9 — Перегрузка операторов
+#include <iostream>
+class Fraction {
+public:
+    int numerator;
+    int denominator;
+    Fraction(int n, int d) : numerator(n), denominator(d) {}
+
+    Fraction operator+(const Fraction& other) const {
+        int common = denominator * other.denominator;
+        int num = numerator * other.denominator + other.numerator * denominator;
+        int g = gcd(num, common);
+        return Fraction(num / g, common / g);
+    }
+    static int gcd(int a, int b) {
+        while(b) {
+            int t = b;
+            b = a % b;
+            a = t;
+        }
+        return a;
+    }
+    void print() const {
+        std::cout << numerator << "/" << denominator << std::endl;
+    }
+};
+
+int main() {
+    Fraction f1(1, 4);
+    Fraction f2(1, 6);
+    Fraction f3 = f1 + f2;
+    f3.print(); // 5/12
+    return 0;
+}
+
+
+Задание 10 — Композиция и агрегация
+#include <iostream>
+#include <string>
+#include <vector>
+class Book {
+public:
+    std::string title;
+    std::string author;
+    int year;
+    Book() : title(""), author(""), year(0) {}
+    Book(const std::string& t, const std::string& a, int y) : title(t), author(a), year(y) {}
+    void display() const {
+        std::cout << "Название: " << title << ", Автор: " << author << ", Год: " << year << std::endl;
+    }
+};
+
+class Library {
+private:
+    std::vector<Book> books;
+public:
+    void addBook(const Book& book) { books.push_back(book); }
+    void displayAllBooks() const {
+        for (const auto& book : books) {
+            book.display();
+        }
+    }
+};
+
+int main() {
+    Library lib;
+    Book b1("1984", "George Orwell", 1949);
+    Book b2("Мастер и Маргарита", "Михаил Булгаков", 1967);
+    Book b3("Война и мир", "Лев Толстой", 1869);
+    lib.addBook(b1);
+    lib.addBook(b2);
+    lib.addBook(b3);
+    lib.displayAllBooks();
+    return 0;
+}
+
+Если нужно объяснение какого-то задания или кода — пиши!
+
+ЛАБА 5
+
+ChatGPT + Midjourney, [30.05.2025 18:55]
+Задание 1 — Перегрузка арифметических операторов
+
+#include <iostream>
+int gcd(int a, int b) { while(b) { int t = b; b = a % b; a = t; } return a; }
+
+class Fraction {
+    int numerator, denominator;
+    void reduce() {
+        int g = gcd(abs(numerator), abs(denominator));
+        if (g) { numerator /= g; denominator /= g; }
+        // знак только у числителя
+        if(denominator < 0) { numerator = -numerator; denominator = -denominator; }
+    }
+public:
+    Fraction(int n=0, int d=1) : numerator(n), denominator(d) { reduce(); }
+    Fraction operator+(const Fraction& other) const {
+        int num = numerator * other.denominator + other.numerator * denominator;
+        int denom = denominator * other.denominator;
+        return Fraction(num, denom);
+    }
+    Fraction operator-(const Fraction& other) const {
+        int num = numerator * other.denominator - other.numerator * denominator;
+        int denom = denominator * other.denominator;
+        return Fraction(num, denom);
+    }
+    Fraction operator*(const Fraction& other) const {
+        return Fraction(numerator * other.numerator, denominator * other.denominator);
+    }
+    Fraction operator/(const Fraction& other) const {
+        return Fraction(numerator * other.denominator, denominator * other.numerator);
+    }
+    friend std::ostream& operator<<(std::ostream& out, const Fraction& f) {
+        return out << f.numerator << "/" << f.denominator;
+    }
+};
+
+int main() {
+    Fraction f1(2,3), f2(1,6);
+    std::cout << f1 << " + " << f2 << " = " << f1 + f2 << std::endl;
+    std::cout << f1 << " - " << f2 << " = " << f1 - f2 << std::endl;
+    std::cout << f1 << " * " << f2 << " = " << f1 * f2 << std::endl;
+    std::cout << f1 << " / " << f2 << " = " << f1 / f2 << std::endl;
+}
+
+
+Задание 2 — Перегрузка оператора сравнения
+
+#include <iostream>
+#include <string>
+class Student {
+public:
+    std::string name;
+    int grade;
+    Student(const std::string& n, int g): name(n), grade(g) {}
+    bool operator==(const Student& s) const { return grade == s.grade; }
+    bool operator<(const Student& s) const { return name < s.name; }
+};
+
+int main() {
+    Student a("Ваня", 5), b("Петя", 5), c("Аня", 4);
+    std::cout << (a == b) << " " << (a == c) << std::endl; // 1 0
+    std::cout << (c < a) << std::endl; // 1 (Аня < Ваня)
+}
+
+
+Задание 3 — Перегрузка оператора ввода/вывода
+
+#include <iostream>
+#include <string>
+class Book {
+public:
+    std::string title;
+    int year;
+    friend std::ostream& operator<<(std::ostream& out, const Book& b) {
+        return out << b.title << " (" << b.year << ")";
+    }
+    friend std::istream& operator>>(std::istream& in, Book& b) {
+        std::getline(in, b.title);
+        in >> b.year;
+        in.ignore(); // убрать перевод строки после числа
+        return in;
+    }
+};
+
+int main() {
+    Book b;
+    std::cout << "Введите название и год:" << std::endl;
+    std::cin >> b;
+    std::cout << "Книга: " << b << std::endl;
+}
+
+
+Задание 4 — Перегрузка оператора инкремента
+
+#include <iostream>
+class Counter {
+    int value;
+public:
+    Counter(int v=0): value(v) {}
+    // Префикс
+    Counter& operator++() { value++; return *this; }
+    // Постфикс
+    Counter operator++(int) { Counter temp = *this; value++; return temp; }
+    int get() const { return value; }
+};
+
+int main() {
+    Counter c(5);
+    ++c;
+    std::cout << c.get() << std::endl; // 6
+    c++;
+    std::cout << c.get() << std::endl; // 7
+}
+
+
+Задание 5 — Перегрузка оператора приведения типа
+
+#include <iostream>
+class Distance {
+    double meters;
+public:
+    Distance(double m): meters(m) {}
+    operator double() const { return meters / 1000.0; } // в километрах
+};
+
+int main() {
+    Distance d(1500);
+    double km = d;
+    std::cout << "В километрах: " << km << std::endl;
+}
+
+
+Задание 6 — Дружественная функция
+
+#include <iostream>
+class Rectangle {
+    double width, height;
+public:
+    Rectangle(double w, double h): width(w), height(h) {}
+    friend double calculateArea(const Rectangle&);
+};
+
+double calculateArea(const Rectangle& r) {
+
+ChatGPT + Midjourney, [30.05.2025 18:55]
+
+    return r.width * r.height;
+}
+
+int main() {
+    Rectangle r(3, 4.5);
+    std::cout << calculateArea(r) << std::endl;
+}
+
+
+Задание 7 — Дружественный класс
+
+#include <iostream>
+#include <string>
+class SecretAccess; // заранее объявляем
+
+class Secret {
+    std::string data;
+public:
+    Secret(const std::string& d): data(d) {}
+    friend class SecretAccess;
+};
+
+class SecretAccess {
+public:
+    void printSecret(const Secret& s) {
+        std::cout << "Секрет: " << s.data << std::endl;
+    }
+};
+
+int main() {
+    Secret s("Пароль123!");
+    SecretAccess sa;
+    sa.printSecret(s);
+}
+
+
+Задание 8 — Перегрузка оператора присваивания
+
+#include <iostream>
+class DynamicArray {
+    int* arr;
+    int size;
+public:
+    DynamicArray(int s): size(s), arr(new int[s]) {}
+    ~DynamicArray() { delete[] arr; }
+    DynamicArray(const DynamicArray& d): size(d.size), arr(new int[d.size]) {
+        for(int i=0;i<size;i++) arr[i]=d.arr[i];
+    }
+    DynamicArray& operator=(const DynamicArray& d) {
+        if(this == &d) return *this;
+        delete[] arr;
+        size = d.size;
+        arr = new int[size];
+        for(int i=0;i<size;i++) arr[i]=d.arr[i];
+        return *this;
+    }
+    int& operator[](int i) { return arr[i]; }
+};
+
+int main() {
+    DynamicArray a(3);
+    a[0]=1; a[1]=2; a[2]=3;
+    DynamicArray b(1);
+    b = a;
+    std::cout << b[2] << std::endl;
+}
+
+
+Задание 9 — Перегрузка оператора индексации
+
+#include <iostream>
+#include <string>
+class String {
+    std::string data;
+public:
+    String(const std::string& s): data(s) {}
+    char& operator[](int i) { return data[i]; }
+    const char& operator[](int i) const { return data[i]; }
+    void print() const { std::cout << data << std::endl; }
+};
+
+int main() {
+    String s("hello");
+    s[0] = 'H'; // запись
+    std::cout << s[1] << std::endl; // чтение
+    s.print();
+}
+
+
+Задание 10 — Комбинированная задача
+
+#include <iostream>
+class Matrix {
+    double m[2][2];
+public:
+    Matrix(double a=0,double b=0,double c=0,double d=0) {
+        m[0][0]=a; m[0][1]=b; m[1][0]=c; m[1][1]=d;
+    }
+    Matrix operator+(const Matrix& other) const {
+        return Matrix(m[0][0]+other.m[0][0], m[0][1]+other.m[0][1],
+                      m[1][0]+other.m[1][0], m[1][1]+other.m[1][1]);
+    }
+    Matrix operator*(const Matrix& other) const {
+        return Matrix(
+            m[0][0]*other.m[0][0]+m[0][1]*other.m[1][0], m[0][0]*other.m[0][1]+m[0][1]*other.m[1][1],
+            m[1][0]*other.m[0][0]+m[1][1]*other.m[1][0], m[1][0]*other.m[0][1]+m[1][1]*other.m[1][1]
+        );
+    }
+    friend std::ostream& operator<<(std::ostream& out, const Matrix& mat) {
+
+ЛАБА 6
+
+ChatGPT + Midjourney, [30.05.2025 18:55]
+Задание 1 — Перегрузка арифметических операторов
+
+#include <iostream>
+int gcd(int a, int b) { while(b) { int t = b; b = a % b; a = t; } return a; }
+
+class Fraction {
+    int numerator, denominator;
+    void reduce() {
+        int g = gcd(abs(numerator), abs(denominator));
+        if (g) { numerator /= g; denominator /= g; }
+        // знак только у числителя
+        if(denominator < 0) { numerator = -numerator; denominator = -denominator; }
+    }
+public:
+    Fraction(int n=0, int d=1) : numerator(n), denominator(d) { reduce(); }
+    Fraction operator+(const Fraction& other) const {
+        int num = numerator * other.denominator + other.numerator * denominator;
+        int denom = denominator * other.denominator;
+        return Fraction(num, denom);
+    }
+    Fraction operator-(const Fraction& other) const {
+        int num = numerator * other.denominator - other.numerator * denominator;
+        int denom = denominator * other.denominator;
+        return Fraction(num, denom);
+    }
+    Fraction operator*(const Fraction& other) const {
+        return Fraction(numerator * other.numerator, denominator * other.denominator);
+    }
+    Fraction operator/(const Fraction& other) const {
+        return Fraction(numerator * other.denominator, denominator * other.numerator);
+    }
+    friend std::ostream& operator<<(std::ostream& out, const Fraction& f) {
+        return out << f.numerator << "/" << f.denominator;
+    }
+};
+
+int main() {
+    Fraction f1(2,3), f2(1,6);
+    std::cout << f1 << " + " << f2 << " = " << f1 + f2 << std::endl;
+    std::cout << f1 << " - " << f2 << " = " << f1 - f2 << std::endl;
+    std::cout << f1 << " * " << f2 << " = " << f1 * f2 << std::endl;
+    std::cout << f1 << " / " << f2 << " = " << f1 / f2 << std::endl;
+}
+
+
+Задание 2 — Перегрузка оператора сравнения
+
+#include <iostream>
+#include <string>
+class Student {
+public:
+    std::string name;
+    int grade;
+    Student(const std::string& n, int g): name(n), grade(g) {}
+    bool operator==(const Student& s) const { return grade == s.grade; }
+    bool operator<(const Student& s) const { return name < s.name; }
+};
+
+int main() {
+    Student a("Ваня", 5), b("Петя", 5), c("Аня", 4);
+    std::cout << (a == b) << " " << (a == c) << std::endl; // 1 0
+    std::cout << (c < a) << std::endl; // 1 (Аня < Ваня)
+}
+
+
+Задание 3 — Перегрузка оператора ввода/вывода
+
+#include <iostream>
+#include <string>
+class Book {
+public:
+    std::string title;
+    int year;
+    friend std::ostream& operator<<(std::ostream& out, const Book& b) {
+        return out << b.title << " (" << b.year << ")";
+    }
+    friend std::istream& operator>>(std::istream& in, Book& b) {
+        std::getline(in, b.title);
+        in >> b.year;
+        in.ignore(); // убрать перевод строки после числа
+        return in;
+    }
+};
+
+int main() {
+    Book b;
+    std::cout << "Введите название и год:" << std::endl;
+    std::cin >> b;
+    std::cout << "Книга: " << b << std::endl;
+}
+
+
+Задание 4 — Перегрузка оператора инкремента
+
+#include <iostream>
+class Counter {
+    int value;
+public:
+    Counter(int v=0): value(v) {}
+    // Префикс
+    Counter& operator++() { value++; return *this; }
+    // Постфикс
+    Counter operator++(int) { Counter temp = *this; value++; return temp; }
+    int get() const { return value; }
+};
+
+int main() {
+    Counter c(5);
+    ++c;
+    std::cout << c.get() << std::endl; // 6
+    c++;
+    std::cout << c.get() << std::endl; // 7
+}
+
+
+Задание 5 — Перегрузка оператора приведения типа
+
+#include <iostream>
+class Distance {
+    double meters;
+public:
+    Distance(double m): meters(m) {}
+    operator double() const { return meters / 1000.0; } // в километрах
+};
+
+int main() {
+    Distance d(1500);
+    double km = d;
+    std::cout << "В километрах: " << km << std::endl;
+}
+
+
+Задание 6 — Дружественная функция
+
+#include <iostream>
+class Rectangle {
+    double width, height;
+public:
+    Rectangle(double w, double h): width(w), height(h) {}
+    friend double calculateArea(const Rectangle&);
+};
+
+double calculateArea(const Rectangle& r) {
+
+ChatGPT + Midjourney, [30.05.2025 18:55]
+1. Базовое наследование
+#include <iostream>
+class Vehicle {
+public:
+    void start() { std::cout << "Vehicle started" << std::endl; }
+    void stop()  { std::cout << "Vehicle stopped" << std::endl; }
+};
+
+class Car : public Vehicle {
+public:
+    void honk() { std::cout << "Car beeps! 🚗" << std::endl; }
+};
+
+class Bicycle : public Vehicle {
+public:
+    void ringBell() { std::cout << "Bicycle rings bell! 🚲" << std::endl; }
+};
+
+int main() {
+    Car c;
+    c.start();
+    c.honk();
+    c.stop();
+
+    Bicycle b;
+    b.start();
+    b.ringBell();
+    b.stop();
+    return 0;
+}
+
+
+2. Переопределение методов
+#include <iostream>
+class Shape {
+public:
+    virtual void draw() const { std::cout << "Drawing shape..." << std::endl; }
+};
+
+class Circle : public Shape {
+public:
+    void draw() const override { std::cout << "Drawing circle" << std::endl; }
+};
+
+class Square : public Shape {
+public:
+    void draw() const override { std::cout << "Drawing square" << std::endl; }
+};
+
+class Triangle : public Shape {
+public:
+    void draw() const override { std::cout << "Drawing triangle" << std::endl; }
+};
+
+int main() {
+    Shape* shapes[3] = { new Circle(), new Square(), new Triangle() };
+    for(int i=0;i<3;++i) shapes[i]->draw();
+    for(int i=0;i<3;++i) delete shapes[i];
+    return 0;
+}
+
+
+3. Абстрактный класс
+#include <iostream>
+#include <vector>
+class Animal {
+public:
+    virtual void makeSound() const = 0;
+    virtual ~Animal() {}
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() const override { std::cout << "Woof!" << std::endl; }
+};
+class Cat : public Animal {
+public:
+    void makeSound() const override { std::cout << "Meow!" << std::endl; }
+};
+class Cow : public Animal {
+public:
+    void makeSound() const override { std::cout << "Moo!" << std::endl; }
+};
+
+void animalSounds(const std::vector<Animal*>& animals) {
+    for(const Animal* a : animals)
+        a->makeSound();
+}
+
+int main() {
+    std::vector<Animal*> v = {new Dog, new Cat, new Cow};
+    animalSounds(v);
+    for(Animal* a : v) delete a;
+    return 0;
+}
+
+
+4. Многоуровневое наследование
+#include <iostream>
+#include <string>
+class Person {
+protected:
+    std::string name;
+public:
+    Person(const std::string& n) : name(n) {}
+    void introduce() { std::cout << "Name: " << name << std::endl; }
+};
+
+class Employee : public Person {
+protected:
+    std::string position;
+public:
+    Employee(const std::string& n, const std::string& p) : Person(n), position(p) {}
+    void work() { std::cout << name << " работает как " << position << std::endl; }
+};
+
+class Manager : public Employee {
+protected:
+    int teamSize;
+public:
+    Manager(const std::string& n, const std::string& p, int t)
+      : Employee(n,p), teamSize(t) {}
+    void manage() { std::cout << name << " управляет командой из " << teamSize << " человек" << std::endl; }
+};
+
+int main() {
+    Manager m("Олег", "Team Lead", 5);
+    m.introduce();
+    m.work();
+    m.manage();
+    return 0;
+}
+
+
+5. Множественное наследование
+#include <iostream>
+class Printer {
+public:
+    void print() { std::cout << "Печать документа..." << std::endl; }
+};
+
+class Scanner {
+public:
+    void scan() { std::cout << "Сканирование документа..." << std::endl; }
+};
+
+class Copier : public Printer, public Scanner {};
+
+int main() {
+    Copier c;
+    c.print();
+    c.scan();
+    return 0;
+}
+
+
+6. Виртуальный деструктор
+#include <iostream>
+// 1. Без virtual
+class Base {
+public:
+    ~Base() { std::cout << "Base dtor" << std::endl; }
+};
+
+class Derived : public Base {
+    int* arr;
+public:
+    Derived() { arr = new int[100]; }
+    ~Derived() { std::cout << "Derived dtor" << std::endl; delete[] arr; }
+};
+
+void test1() {
+    Base* ptr = new Derived();
+    delete ptr;  // Вызван только Base::~Base, память из-под arr не освобождена!
+}
+
+// 2. С virtual
+class VBase {
+public:
+    virtual ~VBase() { std::cout << "VBase dtor" << std::endl; }
+};
+class VDerived : public VBase {
+    int* arr;
+public:
+    VDerived() { arr = new int[100]; }
