@@ -1,0 +1,137 @@
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
+#include <algorithm>
+#include <string>
+
+// Задание 1. Многокритериальная сортировка
+void task1() {
+    std::vector<std::pair<std::string, int>> cities = {
+        {"New York", 8419000},
+        {"Los Angeles", 3980000},
+        {"Chicago", 2716000},
+        {"Houston", 2328000},
+        {"Phoenix", 1690000},
+        {"Philadelphia", 1584000},
+        {"San Antonio", 1547000},
+        {"San Diego", 1424000}
+    };
+
+    std::sort(cities.begin(), cities.end(), [](const auto& a, const auto& b) {
+        if (a.second != b.second)
+            return a.second > b.second;
+        return a.first < b.first;
+    });
+
+    std::cout << "Задание 1: Города отсортированы по населению и названию:\n";
+    for (const auto& city : cities) {
+        std::cout << city.first << " - " << city.second << '\n';
+    }
+}
+
+// Задание 2. Использование контейнера std::list и алгоритмов
+void task2() {
+    std::list<std::string> months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    
+    std::cout << "\nЗадание 2: Месяцы до удаления:\n";
+    for (const auto& month : months) {
+        std::cout << month << '\n';
+    }
+
+    months.remove_if([](const std::string& s) {
+        return s.size() < 5;
+    });
+
+    std::cout << "\nМесяцы после удаления:\n";
+    for (const auto& month : months) {
+        std::cout << month << '\n';
+    }
+}
+
+// Задание 3. Поиск элементов в контейнере std::map
+void task3() {
+    std::map<std::string, int> products = {
+        {"Laptop", 1500},
+        {"Phone", 800},
+        {"Tablet", 400},
+        {"Monitor", 300},
+        {"Mouse", 50}
+    };
+    
+    std::string search;
+    std::cout << "\nЗадание 3: Введите название товара для поиска: ";
+    std::cin >> search;
+
+    auto it = products.find(search);
+    if (it != products.end()) {
+        std::cout << "Цена товара " << it->first << " - " << it->second << '\n';
+    } else {
+        std::cout << "Товар не найден.\n";
+    }
+}
+
+// Функциональный объект для фильтрации книг
+class BookFilter {
+public:
+    BookFilter(size_t n, size_t m) : n_(n), m_(m) {}
+    bool operator()(const std::pair<std::string, int>& book) const {
+        return book.first.length() > n_ && book.second > m_;
+    }
+private:
+    size_t n_;
+    size_t m_;
+};
+
+// Задание 4. Собственный функциональный объект для фильтрации вектора
+void task4() {
+    std::vector<std::pair<std::string, int>> books = {
+        {"War and Peace", 1225},
+        {"1984", 328},
+        {"The Great Gatsby", 180},
+        {"To Kill a Mockingbird", 281},
+        {"The Hobbit", 310}
+    };
+
+    std::vector<std::pair<std::string, int>> filteredBooks;
+    std::copy_if(books.begin(), books.end(), std::back_inserter(filteredBooks), BookFilter(10, 300));
+
+    std::cout << "\nЗадание 4: Отфильтрованные книги:\n";
+    for (const auto& book : filteredBooks) {
+        std::cout << book.first << " - " << book.second << " страниц\n";
+    }
+}
+
+// Задание 5. Комбинирование алгоритмов и контейнеров
+void task5() {
+    std::vector<int> vec1, vec2;
+    for (int i = 0; i < 10; ++i) vec1.push_back(i);
+    for (int i = 5; i < 15; ++i) vec2.push_back(i);
+
+    std::vector<int> intersection;
+    std::set_intersection(vec1.begin(), vec1.end(), vec2.begin(), vec2.end(), std::back_inserter(intersection));
+
+    std::cout << "\nЗадание 5: Содержимое вектора 1:\n";
+    for (int num : vec1) {
+        std::cout << num << ' ';
+    }
+
+    std::cout << "\nСодержимое вектора 2:\n";
+    for (int num : vec2) {
+        std::cout << num << ' ';
+    }
+
+    std::cout << "\nПересечение векторов:\n";
+    for (int num : intersection) {
+        std::cout << num << ' ';
+    }
+}
+
+int main() {
+    task1();
+    task2();
+    task3();
+    task4();
+    task5();
+    return 0;
+}
