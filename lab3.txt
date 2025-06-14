@@ -1,0 +1,156 @@
+Задача 1 — Пространство имен для математических операций:
+
+#include <iostream>
+namespace MathUtils {
+    const double PI = 3.1415;
+    int square(int x) { return x * x; }
+}
+
+int main() {
+    std::cout << "Square: " << MathUtils::square(5) << std::endl;
+    std::cout << "PI: " << MathUtils::PI << std::endl;
+    return 0;
+}
+
+Задача 2 — Вложенные пространства имен:
+
+#include <iostream>
+namespace Game {
+    namespace Physics {
+        void applyGravity() {
+            std::cout << "Gravity applied!" << std::endl;
+        }
+    }
+}
+
+int main() {
+    Game::Physics::applyGravity();
+    return 0;
+}
+
+Задача 3 — Псевдонимы для пространств:
+
+#include <iostream>
+namespace VeryLongNamespaceName {
+    void test() { std::cout << "Test called!" << std::endl; }
+}
+
+namespace Short = VeryLongNamespaceName;
+
+int main() {
+    Short::test();
+    return 0;
+}
+
+Задача 4 — Исправьте ошибку (using namespace):
+
+#include <iostream>
+namespace A { int x = 10; }
+namespace B { int x = 20; }
+
+int main() {
+    std::cout << A::x << std::endl; // Явно указываем пространство имен
+    // Или: std::cout << B::x << std::endl;
+    return 0;
+}
+
+Задача 5 — Динамическое создание объекта:
+
+#include <iostream>
+#include <string>
+class Student {
+public:
+    std::string name;
+    Student(const std::string& n) : name(n) {}
+};
+
+int main() {
+    Student* st = new Student("Alice");
+    std::cout << st->name << std::endl;
+    delete st;
+    return 0;
+}
+
+Задача 6 — Массивы и new/delete:
+
+#include <iostream>
+int main() {
+    int* arr = new int[10];
+    for (int i = 0; i < 10; ++i) arr[i] = i + 1;
+    for (int i = 0; i < 10; ++i) std::cout << arr[i] << " ";
+    std::cout << std::endl;
+    delete[] arr;
+    return 0;
+}
+
+Задача 7 — Обработка исключений:
+
+#include <iostream>
+#include <new>
+int main() {
+    try {
+        int* bigArr = new int[1000000000000];
+        delete[] bigArr;
+    } catch (std::bad_alloc&) {
+        std::cout << "Out of memory!" << std::endl;
+    }
+    return 0;
+}
+
+Задача 8 — Поиск утечек:
+
+int* a = new int(5);
+int* arr = new int[3]{1, 2, 3};
+delete a;
+delete[] arr; // Исправлено: был пропущен delete[]
+// Исправление 1: delete[] для массива
+// Ошибка 2: можно еще добавить nullptr после удаления, чтобы избежать висячих указателей:
+a = nullptr;
+arr = nullptr;
+// Ошибка 3: Нет использования результата вне main (можно добавить вывод, но для утечки это не критично)
+
+Задача 9 — Умные указатели:
+
+#include <iostream>
+#include <string>
+#include <memory>
+class Student {
+public:
+    std::string name;
+    Student(const std::string& n) : name(n) {}
+};
+
+int main() {
+    std::unique_ptr<Student> st(new Student("Alice"));
+    std::cout << st->name << std::endl;
+    // delete НЕ нужен! Память освободится автоматически.
+    return 0;
+}
+
+*Пояснение*  
+std::unique_ptr автоматически освобождает память, предотвращая утечки и двойное освобождение. Вам не нужно вызывать delete вручную.
+
+Задача 10 — Комплексная задача
+
+#include <iostream>
+#include <string>
+#include <memory>
+namespace Library {
+    class Book {
+    public:
+        std::string title;
+        Book(const std::string& t) : title(t) {}
+    };
+}
+
+int main() {
+    std::shared_ptr<Library::Book> books[3] = {
+        std::make_shared<Library::Book>("C++ Primer"),
+        std::make_shared<Library::Book>("Effective C++"),
+        std::make_shared<Library::Book>("Clean Code")
+    };
+    for (int i = 0; i < 3; ++i)
+        std::cout << books[i]->title << std::endl;
+    // Память освободится автоматически при выходе из main
+    return 0;
+}
