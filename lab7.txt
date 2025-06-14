@@ -1,0 +1,331 @@
+1. Базовое наследование
+#include <iostream>
+class Vehicle {
+public:
+    void start() { std::cout << "Vehicle started" << std::endl; }
+    void stop()  { std::cout << "Vehicle stopped" << std::endl; }
+};
+
+class Car : public Vehicle {
+public:
+    void honk() { std::cout << "Car beeps! 🚗" << std::endl; }
+};
+
+class Bicycle : public Vehicle {
+public:
+    void ringBell() { std::cout << "Bicycle rings bell! 🚲" << std::endl; }
+};
+
+int main() {
+    Car c;
+    c.start();
+    c.honk();
+    c.stop();
+
+    Bicycle b;
+    b.start();
+    b.ringBell();
+    b.stop();
+    return 0;
+}
+
+
+2. Переопределение методов
+#include <iostream>
+class Shape {
+public:
+    virtual void draw() const { std::cout << "Drawing shape..." << std::endl; }
+};
+
+class Circle : public Shape {
+public:
+    void draw() const override { std::cout << "Drawing circle" << std::endl; }
+};
+
+class Square : public Shape {
+public:
+    void draw() const override { std::cout << "Drawing square" << std::endl; }
+};
+
+class Triangle : public Shape {
+public:
+    void draw() const override { std::cout << "Drawing triangle" << std::endl; }
+};
+
+int main() {
+    Shape* shapes[3] = { new Circle(), new Square(), new Triangle() };
+    for(int i=0;i<3;++i) shapes[i]->draw();
+    for(int i=0;i<3;++i) delete shapes[i];
+    return 0;
+}
+
+
+3. Абстрактный класс
+#include <iostream>
+#include <vector>
+class Animal {
+public:
+    virtual void makeSound() const = 0;
+    virtual ~Animal() {}
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() const override { std::cout << "Woof!" << std::endl; }
+};
+class Cat : public Animal {
+public:
+    void makeSound() const override { std::cout << "Meow!" << std::endl; }
+};
+class Cow : public Animal {
+public:
+    void makeSound() const override { std::cout << "Moo!" << std::endl; }
+};
+
+void animalSounds(const std::vector<Animal*>& animals) {
+    for(const Animal* a : animals)
+        a->makeSound();
+}
+
+int main() {
+    std::vector<Animal*> v = {new Dog, new Cat, new Cow};
+    animalSounds(v);
+    for(Animal* a : v) delete a;
+    return 0;
+}
+
+
+4. Многоуровневое наследование
+#include <iostream>
+#include <string>
+class Person {
+protected:
+    std::string name;
+public:
+    Person(const std::string& n) : name(n) {}
+    void introduce() { std::cout << "Name: " << name << std::endl; }
+};
+
+class Employee : public Person {
+protected:
+    std::string position;
+public:
+    Employee(const std::string& n, const std::string& p) : Person(n), position(p) {}
+    void work() { std::cout << name << " работает как " << position << std::endl; }
+};
+
+class Manager : public Employee {
+protected:
+    int teamSize;
+public:
+    Manager(const std::string& n, const std::string& p, int t)
+      : Employee(n,p), teamSize(t) {}
+    void manage() { std::cout << name << " управляет командой из " << teamSize << " человек" << std::endl; }
+};
+
+int main() {
+    Manager m("Олег", "Team Lead", 5);
+    m.introduce();
+    m.work();
+    m.manage();
+    return 0;
+}
+
+
+5. Множественное наследование
+#include <iostream>
+class Printer {
+public:
+    void print() { std::cout << "Печать документа..." << std::endl; }
+};
+
+class Scanner {
+public:
+    void scan() { std::cout << "Сканирование документа..." << std::endl; }
+};
+
+class Copier : public Printer, public Scanner {};
+
+int main() {
+    Copier c;
+    c.print();
+    c.scan();
+    return 0;
+}
+
+
+6. Виртуальный деструктор
+#include <iostream>
+// 1. Без virtual
+class Base {
+public:
+    ~Base() { std::cout << "Base dtor" << std::endl; }
+};
+
+class Derived : public Base {
+    int* arr;
+public:
+    Derived() { arr = new int[100]; }
+    ~Derived() { std::cout << "Derived dtor" << std::endl; delete[] arr; }
+};
+
+void test1() {
+    Base* ptr = new Derived();
+    delete ptr;  // Вызван только Base::~Base, память из-под arr не освобождена!
+}
+
+// 2. С virtual
+class VBase {
+public:
+    virtual ~VBase() { std::cout << "VBase dtor" << std::endl; }
+};
+class VDerived : public VBase {
+    int* arr;
+public:
+    VDerived() { arr = new int[100]; }
+ ~VDerived() { std::cout << "VDerived dtor" << std::endl; delete[] arr; }
+};
+
+void test2() {
+    VBase* ptr = new VDerived();
+    delete ptr; // Вызывается сначала VDerived::~VDerived, затем VBase::~VBase
+}
+
+int main() {
+    test1();
+    test2();
+    return 0;
+}
+
+7. Интерфейсы (чисто абстрактные классы)
+C++
+
+#include <iostream>
+class Drawable {
+public:
+    virtual void draw() const = 0;
+    virtual double getArea() const = 0;
+    virtual ~Drawable() {}
+};
+
+class Rectangle : public Drawable {
+    double w, h;
+public:
+    Rectangle(double wi, double he) : w(wi), h(he) {}
+    void draw() const override { std::cout << "Draw rectangle" << std::endl; }
+    double getArea() const override { return w * h; }
+};
+
+class Circle : public Drawable {
+    double r;
+public:
+    Circle(double radius) : r(radius) {}
+    void draw() const override { std::cout << "Draw circle" << std::endl; }
+    double getArea() const override { return 3.14159 * r * r; }
+};
+
+void printInfo(const Drawable& d) {
+    d.draw();
+    std::cout << "Площадь: " << d.getArea() << std::endl;
+}
+
+int main() {
+    Rectangle a(2,3);
+    Circle b(1);
+    printInfo(a);
+    printInfo(b);
+    return 0;
+}
+
+8. Защищённое наследование
+C++
+
+#include <iostream>
+class Base {
+public:
+    int pub = 1;
+protected:
+    int prot = 2;
+private:
+    int priv = 3;
+};
+
+class DerivedPublic : public Base {
+public:
+    void show() {
+        std::cout << pub << " " << prot << std::endl;
+    }
+};
+
+class DerivedProtected : protected Base {
+public:
+    void show() {
+        std::cout << pub << " " << prot << std::endl;
+    }
+};
+
+class DerivedPrivate : private Base {
+public:
+    void show() {
+        std::cout << pub << " " << prot << std::endl;
+    }
+};
+
+int main() {
+    DerivedPublic dp;
+    dp.pub = 10; // Можно доступиться pub
+    dp.show();
+    // DerivedProtected dpr; dpr.pub; // Ошибка!
+    // DerivedPrivate dpi; dpi.pub; // Ошибка!
+    return 0;
+}
+public наследование: pub — public, prot — protected; protected: pub и prot становятся protected; private — всё становится private.
+
+9. Композиция vs наследование
+C++
+
+#include <iostream>
+class Engine {
+public:
+    void start() { std::cout << "Двигатель запущен" << std::endl; }
+};
+
+// Наследование
+class CarInherit : public Engine {};
+// Композиция
+class CarComposed {
+    Engine engine;
+public:
+    void startCar() { engine.start(); }
+};
+
+int main() {
+    CarInherit a;
+    a.start(); // start из Engine
+
+    CarComposed b;
+    b.startCar();
+
+    return 0;
+}
+Наследование: Car становится "является Engine", наследует все методы. Композиция: Car использует Engine как часть себя, реализует интерфейс самостоятельно.
+Плюсы композиций — гибкость и меньше риск конфликтов имён, минус — меньше прозрачности доступа к методам Engine.
+
+10. Финальные классы и методы
+C++
+
+#include <iostream>
+class Base {
+public:
+    virtual void foo() {}
+    virtual void bar() final {} // final - нельзя переопределить
+};
+// Попытка переопределить оба метода:
+class Derived : public Base {
+public:
+    void foo() override {}         // OK
+    // void bar() override {}     // Ошибка: bar объявлен как final!
+};
+// Если сделать весь класс final:
+class FinalClass final {};
+// class Another : public
